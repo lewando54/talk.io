@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talk!</title>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.min.js"></script>
+    <script defer src="scripts/client.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <p><span id="online">0</span> online</p>
+        <div class="msg-box">
+            <p>Połączono z rozmówcą. Przywitaj się!</p>
+        </div>
+        <div class="inputs">
+            <form id="msg-form">
+                <input type="text" name="msg-input" id="msg-input">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

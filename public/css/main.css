@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+*{
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(231, 231, 231);
+}
+
+*:focus{
+    outline: none;
+    border: 3px solid rgb(0, 87, 185) !important;
+}
+
+/* 0 12.5, 12.5 37.5, 37.5 62.5, 62.5 87.5, 87.5 100 */
+
+html{
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(90deg,
+     #0cb4c0 0%,
+     #0cb4c0 12.5%,
+     #0c8bdf 12.5%, 
+     #0c8bdf 37.5%,
+     #0c56df 37.5%, 
+     #0c56df 62.5%,
+     #0c8bdf 62.5%,
+     #0c8bdf 87.5%,
+     #0cb4c0 87.5%,
+     #0cb4c0 100%);
+    background-size: 600% 600%;
+    animation: test 20s linear infinite;
+    display: flex;
+    flex-direction: column;
+}
+body{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.container{
+    box-shadow: 20px 20px 40px rgba(65, 65, 65, 0.5);
+    padding: 20px;
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid #f5f5f570;
+    background-color: #f5f5f570;
+}
+
+
+h1{
+    margin: 0;
+    font-size: calc(15vw - 1vh);
+    text-shadow: 10px 10px 20px rgba(61, 61, 61, 0.623);
+    animation: bounce 2s ease-in-out infinite;
+}
+
+#spinner{
+    animation: rotate 4s ease-in-out infinite;
+}
+
+h2{
+    text-shadow: 10px 10px 20px rgba(61, 61, 61, 0.623);
+    font-size: calc(7vw - 1vh);
+    margin: 0;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.btn{
+    background: linear-gradient(90deg, #0c56df 0%,#0c56df 50%, #1d9258 50%,#1d9258 100%);
+    background-size: 200% 200%;
+    padding: 20px;
+    border-radius: 15px;
+    font-weight: bold;
+    width: 50%;
+    font-size: calc(9vw - 1vh);
+    transition: background-position 0.2s, transform 0.2s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.someone-else{
+    font-size: calc(5vw - 1vh);
+}
+
+.btn:hover{
+    background-position: 100%;
+    transform: scale(1.2);
+}
+
+.you{
+    color: red;
+}
+
+.msg-box{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    font-weight: bold;
+}
+
+form{
+    width: 100%;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(4vw - 1vh);
+}
+
+input[type="text"]{
+    box-shadow: 20px 20px 40px rgba(65, 65, 65, 0.5);
+    padding: 5px 10px;
+    backdrop-filter: blur(20px);
+    border-radius: 15px;
+    width: 90%;
+    border: 3px solid #f5f5f570;
+    background-color: #f5f5f570;
+    color: rgb(61, 61, 61);
+    font-size: calc(3vw - 2vh);
+    transition: border 0.2s;
+}
+
+@keyframes test{
+    0%{background-position:-12.5% 0%}
+    100%{background-position:112.5% 0%}
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotate(5deg);
+    }
+    50%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(5deg);
+    }
+}
+
+@keyframes bounce{
+    0%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.1);
+    }
+    50%{
+        transform: scale(1);
+    }
+    75%{
+        transform: scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    input[type="text"]{
+        font-size: calc(100%);
+    }
+}
