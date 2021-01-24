@@ -3,7 +3,11 @@ let roomId = ''
 let uid = ''
 let time = ''
 
-function talk() {
+function talk(){
+    window.location.href = '/chat'
+}
+
+function searchPartner() {
     showLoading();
     clearInterval(time)
     time = setInterval(async () => { socket.emit('find-someone') }, 1000)
@@ -14,9 +18,9 @@ socket.on('update-online-amount', (howMany) => {
 })
 
 if (!document.querySelector('#spinner')) {
-    roomId = window.location.pathname
-    console.log(roomId, "TEST")
-    socket.emit('join-partner', roomId)
+    searchPartner()
+    
+    
 }
 
 socket.on('connected', (id) => {
@@ -29,9 +33,13 @@ socket.on('search', (data) => {
         console.log("fail")
     }
     else {
+        clearInterval(time)
+        hideLoading()
         console.log("partner-id:", data)
         roomId = data
-        window.location.href = '/' + data
+        document.querySelector('.msg-box').innerHTML = ` <p>Połączono z rozmówcą. Przywitaj się!</p>`
+        socket.emit('join-partner', roomId)
+        console.log(roomId, "TEST")
     }
 })
 
@@ -45,10 +53,12 @@ socket.on('new-msg', msg => {
 
 socket.on('partner-left', () => {
     appendMsg("Twój rozmówca wyszedł", false)
+    socket.emit('leave-queue')
     let inputs = document.querySelector(".inputs")
     inputs.innerHTML = `<div class="btn" onclick="talk()">Znajdź kogoś innego</div>`
 })
 
+if(document.querySelector("#spinner") == undefined)
 document.querySelector('#msg-form').addEventListener('submit', (e) => {
     e.preventDefault()
     sendMsg(document.querySelector('#msg-input').value)
@@ -83,6 +93,14 @@ function showLoading() {
     console.log("test")
 }
 
+function hideLoading() {
+    console.log("test")
+}
+
 window.addEventListener('beforeunload', (e) => { 
+    byebye()
+}); 
+
+window.addEventListener('hashchange', (e) => { 
     byebye()
 }); 

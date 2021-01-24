@@ -96,7 +96,7 @@ main{
 }
 
 .someone-else{
-    font-size: calc(5vw - 1vh);
+    font-size: calc(1vw - 1vh);
 }
 
 .btn:hover{
@@ -113,6 +113,7 @@ main{
     flex-direction: column;
     flex-basis: 100%;
     font-weight: bold;
+    overflow-y: auto;
 }
 
 form{

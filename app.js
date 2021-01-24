@@ -1,9 +1,7 @@
 const express = require('express')
-var cors = require('cors')
 var morgan = require('morgan')
 const app = express()
 const server = app.listen(3000)
-const { v1: uuidv1 } = require('uuid')
 const cookieParser = require('cookie-parser')
 
 
@@ -14,7 +12,6 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
-app.use(cors())
 app.use(morgan('tiny'))
 
 
@@ -28,10 +25,9 @@ const io = require('socket.io')(server, {
 })
 
 io.on('connection', socket => {
-    socket.emit('connected', socket.id);
-    online++;
+    socket.emit('connected', socket.id)
     socket.join("queue");
-
+    online++;
     io.emit('update-online-amount', online)
 
     socket.on('find-someone', () => {
@@ -56,7 +52,6 @@ io.on('connection', socket => {
     socket.on('join-partner', roomId => {
         socket.join(roomId)
         console.log(roomId)
-        io.in(roomId).emit('test', "test123")
     })
     socket.on('send-msg', (msg, roomId) => {
         socket.to(roomId).emit('new-msg', msg)
@@ -65,6 +60,9 @@ io.on('connection', socket => {
         socket.leave(roomId)
         io.in(roomId).emit('partner-left')
     })
+    socket.on('leave-queue', () => {
+        users.splice(socket.id, 1)
+    })
     // socket.in('queue').on('disconnect', () => {
     //     let who = users.indexOf(socket)
     //     users.splice(who, 1)
@@ -72,6 +70,7 @@ io.on('connection', socket => {
 })
 
 app.get('/', (req, res) => {
+    
     res.render('index.ejs')
 })
 
@@ -84,7 +83,7 @@ app.post('/leave', (req, res) => {
     res.send("closed")
 })
 
-app.get('/:id', (req, res) => {
+app.get('/chat', (req, res) => {
     const id = req.params.id
     console.log()
     // if(id.match('/([A-z]|[0-9]|[-]|[_])+[+]([A-z]|[0-9]|[-]|[_])+/g'))
