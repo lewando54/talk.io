@@ -12,14 +12,23 @@
 
 <body>
     <div class="container">
-        <p><span id="online">0</span> online</p>
+        <div class="upper-menu">
+            <p id="online-cont"><span id="online">0</span> online</p>
+            <a href="/">
+                <img src="icons/arrow-thick-left.svg" alt="cofnij">
+            </a>
+            <a href="/chat">
+                <img src="icons/reload.svg" alt="znajdź kogoś innego">
+            </a>
+        </div>
         <div class="msg-box">
            
         </div>
         <div class="inputs">
             <form id="msg-form">
-                <input type="text" name="msg-input" id="msg-input">
+                <input type="text" name="msg-input" id="msg-input" autocomplete="off">
             </form>
+            <p id="typing" style="visibility: hidden;">Partner coś pisze...</p>
         </div>
     </div>
 </body>

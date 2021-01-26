@@ -63,6 +63,12 @@ io.on('connection', socket => {
     socket.on('leave-queue', () => {
         users.splice(socket.id, 1)
     })
+    socket.on("typing-on", (roomId) => {
+        socket.to(roomId).emit("someone-typing", true)
+    })
+    socket.on("typing-off", (roomId) => {
+        socket.to(roomId).emit("someone-typing", false)
+    })
     // socket.in('queue').on('disconnect', () => {
     //     let who = users.indexOf(socket)
     //     users.splice(who, 1)

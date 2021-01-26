@@ -95,6 +95,22 @@ main{
     user-select: none;
 }
 
+.upper-menu{
+    display: flex;
+    color: white;
+    align-items: center;
+}
+
+#online-cont{
+    margin-right: auto;
+}
+
+.upper-menu img{
+    margin-left: 2vw;
+    width: calc(4vw - 1vh);
+    color: white;
+}
+
 .someone-else{
     font-size: calc(1vw - 1vh);
 }
@@ -104,8 +120,24 @@ main{
     transform: scale(1.2);
 }
 
+.newMsgCont{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .you{
-    color: red;
+    color: rgb(0, 26, 255);
+}
+
+.author{
+    font-weight: bold;
+    text-align: left;
+}
+
+.new-msg{
+    text-align: left;
+    font-weight: 200;
 }
 
 .msg-box{
@@ -177,6 +209,10 @@ input[type="text"]{
 
 @media only screen and (max-width: 1000px) {
     input[type="text"]{
-        font-size: calc(100%);
+        font-size: calc(120%);
+    }
+
+    .upper-menu img{
+        width: calc(7vw - 1vh);
     }
 }

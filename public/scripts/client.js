@@ -19,8 +19,6 @@ socket.on('update-online-amount', (howMany) => {
 
 if (!document.querySelector('#spinner')) {
     searchPartner()
-    
-    
 }
 
 socket.on('connected', (id) => {
@@ -61,7 +59,10 @@ socket.on('partner-left', () => {
 if(document.querySelector("#spinner") == undefined)
 document.querySelector('#msg-form').addEventListener('submit', (e) => {
     e.preventDefault()
-    sendMsg(document.querySelector('#msg-input').value)
+    if(document.querySelector('#msg-input').value != ''){
+        sendMsg(document.querySelector('#msg-input').value)
+        socket.emit("typing-off", roomId)
+    }
     document.querySelector('#msg-input').value = ''
 })
 
@@ -82,11 +83,21 @@ function sendMsg(msg) {
 
 function appendMsg(msg, you) {
     let msgbox = document.querySelector('.msg-box')
+    let newMsgCont = document.createElement('div')
+    newMsgCont.classList.add("newMsgCont")
     let newMsg = document.createElement('p')
-    if(you)
-        newMsg.classList.add('you')
+    let authorEl = document.createElement('p')
+    authorEl.innerHTML = "Partner"
+    if(you){
+        authorEl.classList.add('you')
+        authorEl.innerHTML = "Ty"
+    }
     newMsg.innerHTML = msg
-    msgbox.appendChild(newMsg)
+    newMsg.classList.add("new-msg")
+    authorEl.classList.add("author")
+    newMsgCont.appendChild(authorEl)
+    newMsgCont.appendChild(newMsg)
+    msgbox.appendChild(newMsgCont)
 }
 
 function showLoading() {
@@ -96,6 +107,28 @@ function showLoading() {
 function hideLoading() {
     console.log("test")
 }
+
+document.querySelector("#msg-input").addEventListener("keydown", (e) => {
+    if(e.key != "Enter")
+    isTyping()
+})
+
+function isTyping(){
+    let timeleft = 2;
+    var downloadTimer = setInterval(function(){
+        if(timeleft <= 0){
+          clearInterval(downloadTimer);
+          socket.emit("typing-off", roomId)
+        }
+        if(timeleft == 2)
+            socket.emit("typing-on", roomId)
+        timeleft -= 1;
+      }, 1000);
+}
+
+socket.on("someone-typing", (isTyping) => {
+    typing.style.visibility = isTyping ? 'visible' : 'hidden'
+})
 
 window.addEventListener('beforeunload', (e) => { 
     byebye()
