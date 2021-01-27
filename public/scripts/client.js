@@ -42,19 +42,15 @@ socket.on('search', (data) => {
     }
 })
 
-socket.on('test', (data) => {
-    console.log(data)
-})
-
 socket.on('new-msg', msg => {
     appendMsg(msg, false)
 })
 
 socket.on('partner-left', () => {
-    appendLeaveMsg()
+    appendSysMsg("Twój rozmówca wyszedł")
     socket.emit('leave-queue')
     let inputs = document.querySelector(".inputs")
-    inputs.innerHTML = `<div class="btn" onclick="talk()">Znajdź kogoś innego</div>`
+    inputs.innerHTML = `<div class="btn someone-else" onclick="talk()">Znajdź kogoś innego</div>`
 })
 
 if(document.querySelector("#spinner") == undefined)
@@ -82,10 +78,10 @@ function sendMsg(msg) {
     appendMsg(msg, true)
 }
 
-function appendLeaveMsg(){
+function appendSysMsg(msg){
     let msgbox = document.querySelector('.msg-box')
     let newMsg = document.createElement('p')
-    newMsg.innerHTML = "Twój rozmówca wyszedł :("
+    newMsg.innerHTML = msg
     msgbox.appendChild(newMsg)
     msgbox.scrollTop = msgbox.scrollHeight
 }

@@ -107,12 +107,12 @@ main{
 
 .upper-menu img{
     margin-left: 2vw;
-    width: calc(4vw - 1vh);
+    width: calc(3vw - 1vh);
     color: white;
 }
 
 .someone-else{
-    font-size: calc(1vw - 1vh);
+    font-size: calc(3vw - 1vh);
 }
 
 .btn:hover{
@@ -125,13 +125,14 @@ main{
     flex-direction: column;
     width: 50%;
     align-items: flex-start;
-    background-color: #28dad1a0;
+    background-color: #2ab3e9a0;
     padding: 0px 15px;
     border-radius: 15px;
 }
 
 #typing{
     margin: 2px 0;
+    font-size: calc(2vw - 1vh);
 }
 
 .your-msg{
@@ -222,10 +223,18 @@ input[type="text"]{
 
 @media only screen and (max-width: 1000px) {
     input[type="text"]{
-        font-size: calc(120%);
+        font-size: calc(130%);
     }
 
     .upper-menu img{
         width: calc(7vw - 1vh);
+    }
+
+    .someone-else{
+        font-size: calc(7vw - 1vh);
+    }
+
+    #typing{
+        font-size: calc(5vw - 1vh);
     }
 }
