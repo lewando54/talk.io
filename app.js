@@ -37,8 +37,7 @@ io.on('connection', socket => {
             console.log(user.id)
         })
         let rand = getRandomIntInclusive(0, users.length - 1)
-        console.log(rand, users.length)
-        console.log(users[rand].id)
+        online = users.length
         if (users[rand].id != socket.id) {
             const roomId = socket.id+'+'+users[rand].id
             socket.emit('search', roomId)

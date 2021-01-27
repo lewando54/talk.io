@@ -123,11 +123,24 @@ main{
 .newMsgCont{
     display: flex;
     flex-direction: column;
+    width: 50%;
     align-items: flex-start;
+    background-color: #28dad1a0;
+    padding: 0px 15px;
+    border-radius: 15px;
+}
+
+#typing{
+    margin: 2px 0;
+}
+
+.your-msg{
+    background-color:  #001affa0;
+    margin-left:auto;
 }
 
 .you{
-    color: rgb(0, 26, 255);
+    color: rgb(255, 255, 255);
 }
 
 .author{

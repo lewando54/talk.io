@@ -2,6 +2,7 @@ const socket = io();
 let roomId = ''
 let uid = ''
 let time = ''
+let prevAuthor = ''
 
 function talk(){
     window.location.href = '/chat'
@@ -50,7 +51,7 @@ socket.on('new-msg', msg => {
 })
 
 socket.on('partner-left', () => {
-    appendMsg("Twój rozmówca wyszedł", false)
+    appendLeaveMsg()
     socket.emit('leave-queue')
     let inputs = document.querySelector(".inputs")
     inputs.innerHTML = `<div class="btn" onclick="talk()">Znajdź kogoś innego</div>`
@@ -81,6 +82,14 @@ function sendMsg(msg) {
     appendMsg(msg, true)
 }
 
+function appendLeaveMsg(){
+    let msgbox = document.querySelector('.msg-box')
+    let newMsg = document.createElement('p')
+    newMsg.innerHTML = "Twój rozmówca wyszedł :("
+    msgbox.appendChild(newMsg)
+    msgbox.scrollTop = msgbox.scrollHeight
+}
+
 function appendMsg(msg, you) {
     let msgbox = document.querySelector('.msg-box')
     let newMsgCont = document.createElement('div')
@@ -90,14 +99,19 @@ function appendMsg(msg, you) {
     authorEl.innerHTML = "Partner"
     if(you){
         authorEl.classList.add('you')
+        newMsgCont.classList.add('your-msg')
         authorEl.innerHTML = "Ty"
     }
     newMsg.innerHTML = msg
     newMsg.classList.add("new-msg")
     authorEl.classList.add("author")
-    newMsgCont.appendChild(authorEl)
+    if((prevAuthor == 'you' && you == false) || (prevAuthor == 'partner' && you == true) || (prevAuthor == '')){
+        newMsgCont.appendChild(authorEl)
+    }
     newMsgCont.appendChild(newMsg)
     msgbox.appendChild(newMsgCont)
+    prevAuthor = you ? 'you' : 'partner'
+    msgbox.scrollTop = msgbox.scrollHeight
 }
 
 function showLoading() {
