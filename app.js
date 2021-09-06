@@ -68,10 +68,9 @@ io.on('connection', socket => {
     socket.on("typing-off", (roomId) => {
         socket.to(roomId).emit("someone-typing", false)
     })
-    // socket.in('queue').on('disconnect', () => {
-    //     let who = users.indexOf(socket)
-    //     users.splice(who, 1)
-    // })
+    socket.on('disconnect', () => {
+        online--;
+    })
 })
 
 app.get('/', (req, res) => {
