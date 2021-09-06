@@ -111,11 +111,11 @@ function appendMsg(msg, you) {
 }
 
 function showLoading() {
-    console.log("test")
+    document.querySelector('#msg-input').style.visibility = 'hidden'
 }
 
 function hideLoading() {
-    console.log("test")
+    document.querySelector('#msg-input').style.visibility = 'visible'
 }
 
 document.querySelector("#msg-input").addEventListener("keydown", (e) => {
