@@ -1,7 +1,7 @@
 const express = require('express')
 var morgan = require('morgan')
 const app = express()
-const server = app.listen(3000)
+const server = app.listen(3000 || process.env.PORT)
 const cookieParser = require('cookie-parser')
 
 
